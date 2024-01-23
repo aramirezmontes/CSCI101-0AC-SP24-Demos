@@ -4,6 +4,8 @@
 #include <iomanip>
 #include <fstream>
 
+const double PROD_PRICE = 3.5;
+
 int main()
 {
     std::ifstream order;
