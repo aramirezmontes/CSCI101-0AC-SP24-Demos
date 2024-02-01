@@ -1,0 +1,54 @@
+int x = 12;//0C in hex memory cell C0
+int y = -15; //F1 in 2s complement hex memory cell 34
+int z = x + y;
+
+2E0C
+3EC0
+25F1
+3534
+13C0
+1D34
+5F3D
+3F98
+C000
+
+
+
+
+2E0C //load 0C(12) into register E
+3EC0 //store register E in memory C0
+25F1 //load F1(-15) into register 5
+3534 //store register 5 into memory 34
+13C0 // load memory C0 into register 3
+1D34 // load memory 34 into register D
+5F3D // add register 3 and D and store in F
+3F98 // store register F in memory 98
+C000 // halt
+
+Lecture Activity
+
+Convert the following C++ statements into the Brookshear machine language
+
+int a = 70;
+int b = -39;
+int c = 6;
+int d = a + b + c; //this requires 2 add operations
+
+
+
+
+
+
+
+
+two's complement notes
+
+00001111
+11110000
+00000001
+11110001
+
+11111101
+00000010
+00000001
+00000011
