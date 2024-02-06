@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <limits>
+#include <fstream>
+
 // lecture activity add an input validation loop to the number guessing game part of the code.
 int main()
 {
@@ -22,6 +24,7 @@ int main()
         {
             if (!std::cin)
             {
+                // clear and ignore are only used when we have input failure
                 std::cin.clear(); // removes error condition from input stream
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cout << "You entered something that is not a number! Please try again." << std::endl;
@@ -36,6 +39,11 @@ int main()
             std::cout << std::endl;
         }
     }
+    for (double i = 0; i < 7; i = i + 0.001)
+        ; // warning this is a semantic error
+    {
+        std::cout << "*" << std::endl;
+    }
     count--;
     std::cout << "The average calories burned per day is " << sum / count << std::endl;
 
@@ -43,11 +51,29 @@ int main()
     int userNum;
 
     bool isGuessed = false;
-    while (!isGuessed)
+    do
     {
         std::cout << "Guess a number between 1 and 100: ";
         std::cin >> userNum;
         std::cout << std::endl;
+        // this is wrong you have to do the right validation for the lecture activity
+        while (!std::cin)
+        {
+            std::cin.clear(); // removes error condition from input stream
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "You entered something that is not a number! Please try again." << std::endl;
+            std::cout << "Guess a number between 1 and 100: ";
+            std::cin >> userNum;
+            std::cout << std::endl;
+        }
+        while (userNum < 1 || userNum > 100)
+        {
+
+            std::cout << "The number entered is invalid. Please try again." << std::endl;
+            std::cout << "Guess a number between 1 and 100: ";
+            std::cin >> userNum;
+            std::cout << std::endl;
+        }
         if (userNum == magicNum)
         {
             std::cout << "You have chosen wisely." << std::endl;
@@ -61,7 +87,39 @@ int main()
         {
             std::cout << "You have chosen poorly. Your number is too low." << std::endl;
         }
+    } while (!isGuessed);
+
+    // read until the end of the file
+    std::ifstream order;
+    order.open("order.txt");
+    char product;
+    int quantity;
+    std::cout << std::left;
+    std::cout << "+-" << std::setw(33) << std::setfill('-') << "-"
+              << "+" << std::endl;
+    std::cout << std::setfill(' ');
+    std::cout << "| " << std::setw(15) << "Product"
+              << " | " << std::setw(15) << "Quantity"
+              << "|" << std::endl;
+    std::cout << "+-" << std::setw(33) << std::setfill('-') << "-"
+              << "+" << std::endl;
+    while (!order.eof())
+    {
+        order >> product >> quantity;
+
+        if (!order)
+        {
+            continue;
+        }
+        // order processing
+        std::cout << std::setfill(' ');
+        std::cout << "| " << std::setw(15) << product
+                  << " | " << std::setw(15) << quantity
+                  << "|" << std::endl;
+        std::cout << "+-" << std::setw(33) << std::setfill('-') << "-"
+                  << "+" << std::endl;
     }
+
     /*  int x;
      std::cout << "Enter a number: ";
      std::cin >> x;
