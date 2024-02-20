@@ -8,6 +8,12 @@ const int GREEN = 2;
 const int YELLOW = 3;
 const int PURPLE = 4;
 const int ORANGE = 5; */
+
+// lecture activity create an enum based on your 3 favorite ice cream flavors
+// write a function to get an ice cream flavor (like inputColor)
+// write a function to print the name of the ice cream (like printColorName)
+// in a main create 3 ice cream variables and use the functions you created to input and output the values.
+
 enum colorType
 {
     RED,
@@ -32,6 +38,13 @@ int main()
     printColor(color);
     std::cout << printColorName(color) << std::endl;
     std::cout << "\033[0m";
+    std::string myStr = "Have a nice day!";
+    std::cout << myStr[0] << std::endl;
+    myStr = myStr + " See you on Wednesday!";
+    std::cout << myStr << std::endl;
+    int x = 7;
+    myStr = myStr + std::to_string(x);
+    std::cout << myStr << std::endl;
     return 0;
 }
 
