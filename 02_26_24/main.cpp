@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include <cstdlib>
 
 enum suitType
 {
@@ -78,13 +79,23 @@ std::string printCard(cardType theCard);
 std::string printASCIICard(cardType theCard);
 std::string printASCIIPiles(pileType piles[], int numPiles);
 void setUpDeck(deckType &theDeck, pileType foundations[], int numFoundations);
+void shuffleDeck(deckType &theDeck);
+void setUpFirstFoundationCard(deckType &theDeck, pileType foundations[], int numFoundations);
+int displayMenu(bool drawnCard, bool waste, bool noCards);
 
 // Lecture Activity Explain what is happening on lines 103, 160, 232, 233
 // put your explaination in a document and submit to the activity
 
 int main()
 {
-    cardType c;
+
+    deckType gameDeck;
+    pileType foundations[NUM_PILES];
+    pileType wastePiles[NUM_PILES];
+    setUpDeck(gameDeck, foundations, NUM_PILES);
+    shuffleDeck(gameDeck);
+    setUpFirstFoundationCard(gameDeck, foundations, NUM_PILES);
+    /* cardType c;
     c.suit = HEART;
     c.rank = A;
     std::cout << printCard(c) << std::endl;
@@ -92,7 +103,7 @@ int main()
     cardType d;
     d = c;
     suitType mySuit;
-    rankType myRank;
+    rankType myRank; */
 
     return 0;
 }
@@ -233,5 +244,43 @@ void setUpDeck(deckType &theDeck, pileType foundations[], int numFoundations)
             foundations[i].cards[j].rank = ranks[((i + 1) * (j + 1) - 1) % 13];
         }
         foundations[i].topCard = -1;
+    }
+}
+
+void shuffleDeck(deckType &theDeck)
+{
+    cardType shuffled[DECK_SIZE];
+    for (int i = 0; i < DECK_SIZE; i++)
+    {
+        int shuffledCardIndex;
+        do
+        {
+            shuffledCardIndex = rand() % DECK_SIZE;
+        } while (theDeck.cards[shuffledCardIndex].used);
+        shuffled[i] = theDeck.cards[shuffledCardIndex];
+        theDeck.cards[shuffledCardIndex].used = true;
+    }
+    for (int i = 0; i < DECK_SIZE; i++)
+    {
+        theDeck.cards[i] = shuffled[i];
+        theDeck.cards[i].used = false;
+    }
+}
+
+void setUpFirstFoundationCard(deckType &theDeck, pileType foundations[], int numFoundations)
+{
+    for (int i = 0; i < numFoundations; i++)
+    {
+        for (int j = 0; j < DECK_SIZE; j++)
+        {
+            if (theDeck.cards[j].rank == foundations[i].cards[0].rank)
+            {
+                foundations[i].cards[0] = theDeck.cards[j];
+                theDeck.cards[j].used = true;
+                break;
+            }
+        }
+        foundations[i].topCard++;
+        theDeck.remain--;
     }
 }
