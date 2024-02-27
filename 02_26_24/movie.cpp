@@ -70,6 +70,7 @@ int main()
     {
         printMovie(myMovies, movies[i]);
     }
+    int numMovies = sizeof(movies) / sizeof(MovieData);
     myMovies.close();
     return 0;
 }

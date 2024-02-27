@@ -1,2 +1,2 @@
 all:
-	g++ -pedantic-errors -fdiagnostics-color=always -g movie.cpp -o movie
+	g++ -pedantic-errors -fdiagnostics-color=always -g main.cpp -o main
