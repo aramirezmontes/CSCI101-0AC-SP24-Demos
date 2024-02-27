@@ -1,0 +1,20 @@
+Title: Robin Hood
+Genre: Animated
+Director: Animated
+Year Released: 1973
+Running Time (in minutes): 83
+Title: The Shawshank Redemption
+Genre: Drama
+Director: Drama
+Year Released: 1994
+Running Time (in minutes): 142
+Title: Robin Hood
+Genre: Animated
+Director: Animated
+Year Released: 1973
+Running Time (in minutes): 83
+Title: 12 Angry Men
+Genre: Crime, Drama
+Director: Crime, Drama
+Year Released: 1957
+Running Time (in minutes): 96
